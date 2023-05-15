@@ -100,6 +100,8 @@ void parametrodabateria8v(){
 }
 
 void inicial(){
+  Nextion("Page inicial");
+  Oxff();
   //só segue o nome
 }
 
