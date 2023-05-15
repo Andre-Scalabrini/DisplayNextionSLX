@@ -37,6 +37,9 @@ PC3     17
 #include <math.h>
 #include <EEPROM.h>
 #include <LiquidCrystal.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial Nextion(10, 11); //RX, TX
 
 //DISPLAY PINS
 const int PIN_RS = 4;
@@ -456,6 +459,9 @@ void setup()
 
   //Setting Serial
   Serial.begin(115200);
+
+  //Setting software Serial
+  Nextion.begin(9600);
 
   //Starting LCD 16x2
   lcd.begin(20, 4);
