@@ -111,3 +111,55 @@ void configdeangulodegiro(){
 void configlado(){
   //só segue o nome
 }
+
+void modododisplayconfig(){
+  //só segue o nome
+}
+
+void configtempodolaser(){
+  //só segue o nome
+}
+
+void configtempododisplay(){
+  //só segue o nome
+}
+
+void canalwificonfig(){
+  //só segue o nome
+}
+
+void modospoilerconfig(){
+  //só segue o nome
+}
+
+void mostrarindicadorbateria(){
+  //só segue o nome
+}
+
+void nivelarmaquina(){
+  //só segue o nome
+}
+
+void camberdenovo(){
+  //só segue o nome
+}
+
+void niveleobracoousalveparaprosseguir(){
+  //só segue o nome
+}
+
+void gireopneuparadentro(){
+
+}
+
+void retornea0egireparafora(){
+  //só segue o nome
+}
+
+void kpiconfigoneoff(){
+  //só segue o nome
+}
+
+void bateriabaixa(){
+  //só segue o nome
+}
