@@ -50,6 +50,8 @@ void configangulo(){
 }
 
 void configdefabrica(){
+  Nextion("page pageconfiguracoes");
+  Oxff();
   //só segue o nome
 }
 
