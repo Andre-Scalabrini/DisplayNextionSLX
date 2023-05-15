@@ -163,3 +163,9 @@ void kpiconfigoneoff(){
 void bateriabaixa(){
   //só segue o nome
 }
+
+void Oxff(){
+  Nextion.write(0xff);
+  Nextion.write(0xff);
+  Nextion.write(0xff);
+}
