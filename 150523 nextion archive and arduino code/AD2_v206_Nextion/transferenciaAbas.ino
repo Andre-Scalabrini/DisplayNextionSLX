@@ -180,6 +180,7 @@ void camberdenovo(){
 }
 
 void niveleobracoousalveparaprosseguir(){
+  //aparece a opcao antes da opcao 1
   //só segue o nome
 }
 
