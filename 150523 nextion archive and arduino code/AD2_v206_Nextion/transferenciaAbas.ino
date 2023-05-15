@@ -1,8 +1,15 @@
 void bateriacarregando(){
-  //raiozinho na frente da bateria
+  Nextion.println("bateriacarregando.pic");
+  Oxff();
 }
 
 void sembateria(){
+  Nextion.println("sembateria.pic");
+  Oxff();
+  delay(50);
+  Nextionln("nada.pic");
+  Oxff();
+  delay(50);
   //como o nome já diz, o aparelho ta sem carga
 }
 
@@ -11,6 +18,14 @@ void niveldabateria(){
 }
 
 void simbolowifi(){
+
+  if(wifi == ok){
+    Nextion.println("simbolowifi.pic");
+    Oxff();
+  }else{
+    Nextion.println("nada.pic");
+    Oxff();
+  }
   //vai mostrar o simbolo do wifi ou não
 }
 
