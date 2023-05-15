@@ -158,6 +158,7 @@ void configtempododisplay(){
 }
 
 void canalwificonfig(){
+  //configura qual canal o wifi está conectado
   //só segue o nome
 }
 
