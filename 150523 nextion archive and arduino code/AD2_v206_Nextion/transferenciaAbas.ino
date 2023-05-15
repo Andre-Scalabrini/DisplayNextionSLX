@@ -84,10 +84,14 @@ void saindodoajuste(){
 }
 
 void laserligado(){
+  Nextion("Page laserligado");
+  Oxff();
   //só segue o nome
 }
 
 void laserdesligado(){
+  Nextion("Page laserdesligado");
+  Oxff();
   //só segue o nome
 }
 
