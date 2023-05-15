@@ -106,6 +106,16 @@ void inicial(){
 }
 
 void textoinicial(){
+  if(texto == "1"){
+    Nextion("Page texto1");
+    Oxff();
+  }else if(texto == "2"){
+    Nextion("Page texto2");
+    Oxff();
+  }else{
+    Nextion("Page texto3");
+    Oxff();
+  }
   //texto 1
   //texto 2
   //texto 3 (1 e 2 juntos)
