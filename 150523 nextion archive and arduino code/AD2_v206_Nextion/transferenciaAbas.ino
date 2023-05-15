@@ -167,6 +167,7 @@ void modospoilerconfig(){
 }
 
 void mostrarindicadorbateria(){
+  //vai perguntar se quer que exibe ou não o indicador
   //só segue o nome
 }
 
