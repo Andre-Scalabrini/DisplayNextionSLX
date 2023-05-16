@@ -1,3 +1,5 @@
+//pseudo-codes
+
 void bateriacarregando(){
   Nextion.println("bateriacarregando.pic");
   Oxff();
