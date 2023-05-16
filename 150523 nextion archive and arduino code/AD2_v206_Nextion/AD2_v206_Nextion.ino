@@ -581,6 +581,8 @@ void setup()
       lcd.setCursor(0,3);
     }
     lcd.print(txtInic[it]);
+    inicial();
+    Serial.println("ta aqui");
   }
 
   if(exibTxt == TXT3)
@@ -924,7 +926,7 @@ int AnalogSW()
 
 void loop()
 {
-
+pagcamber();
   swA = AnalogSW();
 
   if (swA != 0)
@@ -1372,7 +1374,8 @@ void loop()
     {
       lcd.setCursor(4, 1);
       lcd.print("INICIAL");
-      
+      pagcamber();
+      Serial.println("Ta aqui");
       lcd.setCursor(4, 2);
       if (exibTxt == TXT1)
         lcd.print("TEXTO 1");
@@ -1385,6 +1388,7 @@ void loop()
     }
     else if (state == vers)
     {
+      pagcamber();
       lcd.setCursor(2, 1);
       lcd.print("PROGRAMACAO SLX");
       lcd.setCursor(2, 2);
@@ -1549,6 +1553,7 @@ void loop()
     }
     else if (state == camb)
     {
+      pagcamber();
       lcd.setCursor(7, 1);
       lcd.print("CAMBER:");
       lcd.setCursor(8, 2);

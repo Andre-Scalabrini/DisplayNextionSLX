@@ -1,17 +1,11 @@
 //pseudo-codes
 
 void bateriacarregando(){
-  Nextion.println("bateriacarregando.pic");
-  Oxff();
+
 }
 
 void sembateria(){
-  Nextion.println("sembateria.pic");
-  Oxff();
-  delay(50);
-  Nextionln("nada.pic");
-  Oxff();
-  delay(50);
+
   //como o nome já diz, o aparelho ta sem carga
 }
 
@@ -21,13 +15,6 @@ void niveldabateria(){
 
 void simbolowifi(){
 
-  if(wifi == ok){
-    Nextion.println("simbolowifi.pic");
-    Oxff();
-  }else{
-    Nextion.println("nada.pic");
-    Oxff();
-  }
   //vai mostrar o simbolo do wifi ou não
 }
 
@@ -52,8 +39,6 @@ void configangulo(){
 }
 
 void configdefabrica(){
-  Nextion("page pageconfiguracoes");
-  Oxff();
   //só segue o nome
 }
 
@@ -62,6 +47,10 @@ void alteracaodelado(){
 }
 
 void pagcamber(){
+  Nextion.print("page camber");
+  Oxff();
+  Nextion.println("page camber");
+  Oxff();
   //só segue o nome
 }
 
@@ -86,14 +75,12 @@ void saindodoajuste(){
 }
 
 void laserligado(){
-  Nextion("Page laserligado");
-  Oxff();
+
   //só segue o nome
 }
 
 void laserdesligado(){
-  Nextion("Page laserdesligado");
-  Oxff();
+
   //só segue o nome
 }
 
@@ -102,25 +89,13 @@ void parametrodabateria8v(){
 }
 
 void inicial(){
-  Nextion("Page inicial");
+  Nextion.println("page inicio");
   Oxff();
   //só segue o nome
 }
 
 void textoinicial(){
-  if(texto == "1"){
-    Nextion("Page texto1");
-    Oxff();
-  }else if(texto == "2"){
-    Nextion("Page texto2");
-    Oxff();
-  }else{
-    Nextion("Page texto3");
-    Oxff();
-  }
-  //texto 1
-  //texto 2
-  //texto 3 (1 e 2 juntos)
+
 }
 
 void iniciopadraoslx(){
