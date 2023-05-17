@@ -1,7 +1,7 @@
 //pseudo-codes
 
 void bateriacarregando(){
-
+  
 }
 
 void sembateria(){
@@ -10,6 +10,10 @@ void sembateria(){
 }
 
 void niveldabateria(){
+Nextion.print("h0.val=" + String(vAtual));
+  Oxff();
+  Nextion.println("h0.val=" + String(vAtual));
+  Oxff();
   //mexer a barrinha de acordo com a porcentagem
 }
 

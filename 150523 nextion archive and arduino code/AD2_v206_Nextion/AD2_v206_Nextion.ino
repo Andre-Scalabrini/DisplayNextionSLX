@@ -576,7 +576,7 @@ void setup()
     {
       lcd.setCursor(0,2);
     }
-    else if(it == 60)
+    else if(it == 60) 
     {
       lcd.setCursor(0,3);
     }
@@ -926,6 +926,7 @@ int AnalogSW()
 
 void loop()
 {
+niveldabateria();
 pagcamber();
   swA = AnalogSW();
 
@@ -1790,6 +1791,7 @@ pagcamber();
     }
     else if (!carregando) //NOT CHARGING
     {
+
       if(vAtual < 5.2)
       {
         lcd.clear();
