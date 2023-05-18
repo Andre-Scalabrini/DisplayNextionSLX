@@ -54,7 +54,7 @@ const int PIN_TX = 1;
 
 const int PIN_BMA_SDA = 18;
 const int PIN_BMA_SCL = 19;
-const int PIN_BMA_INT1 = 9;
+const int PIN_BMA_INT1 = 9; 
 const int PIN_BMA_INT2 = 10;
 
 const int PIN_LASER_1 = 3;
@@ -926,7 +926,7 @@ int AnalogSW()
 
 void loop()
 {
-niveldabateria();
+//niveldabateria();
 pagcamber();
   swA = AnalogSW();
 
@@ -1355,7 +1355,7 @@ pagcamber();
     {
       lcd.clear();
       lcd.setCursor(4,1);
-      //lcd.print(pswd);
+      Serial.print(pswd);
 
       if(pswd == 4422)
       {

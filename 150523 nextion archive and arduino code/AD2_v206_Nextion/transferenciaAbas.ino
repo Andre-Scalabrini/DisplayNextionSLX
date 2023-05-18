@@ -10,7 +10,7 @@ void sembateria(){
 }
 
 void niveldabateria(){
-Nextion.print("h0.val=" + String(vAtual));
+  Nextion.print("h0.val=" + String(vAtual));
   Oxff();
   Nextion.println("h0.val=" + String(vAtual));
   Oxff();
