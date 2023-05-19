@@ -39,7 +39,7 @@ PC3     17
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 
-SoftwareSerial Nextion(5, 6); //RX, TX
+SoftwareSerial Nextion(5, 6);  //RX, TX
 
 //DISPLAY PINS
 const int PIN_RS = 4;
@@ -88,17 +88,17 @@ const int tx1Adrs = 280;
 const int tx2Adrs = 380;
 const int nvlAdrs = 480;
 const int sbsAdrs = 490;
-const int splAdrs = 500; 
+const int splAdrs = 500;
 
 char txtInic[80] = {
-  ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-  ' ',' ',' ',' ','S','L','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-  ' ',' ',' ',' ',' ',' ','T','E','C','N','O','L','O','G','I','A',' ',' ',' ',' ',
-  ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '
-  };
+  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+  ' ', ' ', ' ', ' ', 'S', 'L', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+  ' ', ' ', ' ', ' ', ' ', ' ', 'T', 'E', 'C', 'N', 'O', 'L', 'O', 'G', 'I', 'A', ' ', ' ', ' ', ' ',
+  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '
+};
 
 char txtSerial[5] = {
-  ' ',' ',' ',' ',' '
+  ' ', ' ', ' ', ' ', ' '
 };
 
 byte buf2[2];
@@ -384,8 +384,7 @@ int sense;
 LiquidCrystal lcd(PIN_RS, PIN_EN, PIN_D4, PIN_D5, PIN_D6, PIN_D7);
 
 //DATA OVER WIFI CONFIG
-typedef union
-{
+typedef union {
   float value;
   uint8_t Byte[4];
 } FLOAT_UNION;
@@ -405,12 +404,10 @@ uint8_t Data[DataSize];
 
 char serialData;
 
-void AcelRead()
-{
+void AcelRead() {
 }
 
-void setup()
-{
+void setup() {
   MAcX = 0;
   MAcY = 0;
   MAcZ = 0;
@@ -420,7 +417,7 @@ void setup()
   MAcXN = 0;
   MAcYN = 0;
   MAcZN = 0;
-  
+
   //CONVERGENCIA E CENTRALIZACAO
   conv.value = 0;
   cent.value = 0;
@@ -474,11 +471,11 @@ void setup()
   lcd.createChar(bcar, charging);
   lcd.createChar(bub, levelBubble);
   lcd.createChar(wif, wicon);*/
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.noCursor();
 
   //Start BMA255
-  
+
   //LOADING INITIAL CONFIG
 
   //LOAD EEPROM STATUS
@@ -486,21 +483,20 @@ void setup()
 
   //LOAD PADRAO DE TEXTO
   EEPROM.get(txtAdrs, exibTxt);
-  
-    //Se eepromSetup != 0, configurar valores eeprom!
-  if (eepromSetup != 0)
-  {
+
+  //Se eepromSetup != 0, configurar valores eeprom!
+  if (eepromSetup != 0) {
     WPos = fEsq;
     TurnAngle = 10;
     sense = 5;
-    
+
     kpis = kpiOff;
-    
+
     //LOAD WHEEL POSSITION
     EEPROM.put(whpAdrs, WPos);
     EEPROM.put(trnAdrs, TurnAngle);
     EEPROM.put(senAdrs, sense);
-  
+
     //LOAD KPI FUNCTION STATE (ON/OFF)
     EEPROM.put(kpiAdrs, kpis);
 
@@ -508,7 +504,7 @@ void setup()
     chrd = 0;
     timerLaser = 10;
     timerDisplay = 10;
-        
+
     bvParam = 800;
 
     eepromSetup = 0;
@@ -521,19 +517,19 @@ void setup()
     EEPROM.put(chdAdrs, chrd);
     EEPROM.put(ltmAdrs, timerLaser);
     EEPROM.put(dtmAdrs, timerDisplay);
-    
+
     EEPROM.put(bpvAdrs, bvParam);
-    
+
     EEPROM.put(epsAdrs, eepromSetup);
 
     EEPROM.put(kbdAdrs, kboard);
-    
+
     EEPROM.put(txtAdrs, exibTxt);
-    
+
     EEPROM.put(txsAdrs, txtSerial);
 
     EEPROM.put(tx1Adrs, txtInic);
-    
+
     EEPROM.put(tx2Adrs, txtInic);
 
     //MARCADOR DE BATERIA
@@ -547,66 +543,45 @@ void setup()
     //ESTILO NIVEL
     //eNivel = ngrade;
     //EEPROM.put(nvlAdrs, eNivel);
-    
   }
 
   //CARREGA TEXTO DE INICIALIZAÇÃO
-  if(exibTxt == TXT2)
-  {
+  if (exibTxt == TXT2) {
     EEPROM.get(tx2Adrs, txtInic);
-  }
-  else
-  {
+  } else {
     EEPROM.get(tx1Adrs, txtInic);
   }
 
   //EXIBE TEXTO DE INICIALIZAÇÃO
   lcd.clear();
-  for (int it=0; it<80; it++)
-  {
-    if(it == 0)
-    {
-      lcd.setCursor(0,0);
-    }
-    else if(it == 20)
-    {
-      lcd.setCursor(0,1);
-    }
-    else if(it == 40)
-    {
-      lcd.setCursor(0,2);
-    }
-    else if(it == 60) 
-    {
-      lcd.setCursor(0,3);
+  for (int it = 0; it < 80; it++) {
+    if (it == 0) {
+      lcd.setCursor(0, 0);
+    } else if (it == 20) {
+      lcd.setCursor(0, 1);
+    } else if (it == 40) {
+      lcd.setCursor(0, 2);
+    } else if (it == 60) {
+      lcd.setCursor(0, 3);
     }
     lcd.print(txtInic[it]);
     inicial();
     Serial.println("ta aqui");
   }
 
-  if(exibTxt == TXT3)
-  {
+  if (exibTxt == TXT3) {
     EEPROM.get(tx2Adrs, txtInic);
     delay(2000);
     lcd.clear();
-    for (int it=0; it<80; it++)
-    {
-      if(it == 0)
-      {
-        lcd.setCursor(0,0);
-      }
-      else if(it == 20)
-      {
-        lcd.setCursor(0,1);
-      }
-      else if(it == 40)
-      {
-        lcd.setCursor(0,2);
-      }
-      else if(it == 60)
-      {
-        lcd.setCursor(0,3);
+    for (int it = 0; it < 80; it++) {
+      if (it == 0) {
+        lcd.setCursor(0, 0);
+      } else if (it == 20) {
+        lcd.setCursor(0, 1);
+      } else if (it == 40) {
+        lcd.setCursor(0, 2);
+      } else if (it == 60) {
+        lcd.setCursor(0, 3);
       }
       lcd.print(txtInic[it]);
     }
@@ -639,7 +614,7 @@ void setup()
 
   //Initial state
   state = camb;
-  
+
   //Clean CAMBER, CASTER, KPI;
   kpi = 0;
   arm = 0;
@@ -709,72 +684,61 @@ void setup()
 
   //ler acelerometro
   i = 0;
-  for(int o = 0; o < 202; o++)
-  {
+  for (int o = 0; o < 202; o++) {
     AcelRead();
     delay(10);
   }
-  
+
   //delay(1000);
   timerInicial = millis() + 1000;
   lcd.clear();
-  
 }
 
 
-void printGraus(float graus)
-{
+void printGraus(float graus) {
   int gminutos;
 
   gminutos = (int)((graus - (int)graus) * 60);
 
-  if (graus > 0)
-  {
+  if (graus > 0) {
     lcd.print(" ");
     lcd.print((int)graus);
     lcd.write(B11011111);
     if (gminutos < 10)
       lcd.print("0");
-    lcd.print( (int)(gminutos / sense)*sense);
+    lcd.print((int)(gminutos / sense) * sense);
     lcd.print("' ");
-  }
-  else if (graus < 0)
-  {
+  } else if (graus < 0) {
     lcd.print("-");
     lcd.print(-1 * (int)graus);
     lcd.write(B11011111);
     //lcd.print(-1* gminutos);
     if (gminutos > -10)
-      lcd.print("0");
-    lcd.print(-1 * (int)(gminutos / sense)*sense);
+    lcd.print("0");
+    lcd.print(-1 * (int)(gminutos / sense) * sense);
     lcd.print("' ");
-  }
-  else
+  } else
     lcd.print("NAN");
 }
 
-void level(float data)
-{
-  if (spSts == spOn)
-  {
+void level(float data) {
+  if (spSts == spOn) {
     if (data < 10 || data > -10)
       sp = false;
-  
-    if (data > 10)
-    {
+
+    if (data > 10) {
       sp = true;
       data = data - 15;
     }
-  
-    if (data < -10)
-    {
+
+    if (data < -10) {
       sp = true;
       data = data + 15;
     }
   }
 
   lcd.setCursor(0 + chrd, 0);
-/*
+  /*
   if (data > 1.5)
   {
     lcd.write(B11111111);
@@ -819,35 +783,23 @@ void level(float data)
   if (sp)
     lcd.print("SP");
 
-  if (data > 0.2 || data < -0.2)
-  {
-    if (runCont == 1)
-    {
+  if (data > 0.2 || data < -0.2) {
+    if (runCont == 1) {
       lcd.print("  <");
       runCont++;
-    }
-    else if (runCont == 2)
-    {
+    } else if (runCont == 2) {
       lcd.print(" <<");
       runCont++;
-    }
-    else if (runCont == 3)
-    {
+    } else if (runCont == 3) {
       lcd.print("<<<");
       runCont++;
-    }
-    else if (runCont == 4)
-    {
+    } else if (runCont == 4) {
       lcd.print("<< ");
       runCont++;
-    }
-    else if (runCont == 5)
-    {
+    } else if (runCont == 5) {
       lcd.print("<  ");
       runCont++;
-    }
-    else if (runCont == 6)
-    {
+    } else if (runCont == 6) {
       lcd.print("   ");
       runCont = 1;
     }
@@ -855,14 +807,11 @@ void level(float data)
       lcd.print("NIVEL");
     else
       lcd.print("NIVELAR");
-  }
-  else
+  } else
     lcd.print("          ");
-
 }
 
-int AnalogSW()
-{
+int AnalogSW() {
   if (analogRead(PIN_TECLADO) < 280)
     return 0;
 
@@ -870,18 +819,15 @@ int AnalogSW()
 
   voltage = analogRead(PIN_TECLADO);
 
-  if (kboard == PDR1)
-  {
-    if (timerInicial > millis())
-    {
+  if (kboard == PDR1) {
+    if (timerInicial > millis()) {
       if (voltage > 860 && voltage < 900)
         return swN;
       else if (voltage > 620 && voltage < 660)
         return swC;
       else
         return 0;
-    }
-    else if (voltage > 780 && voltage < 880)
+    } else if (voltage > 780 && voltage < 880)
       return sw1;
     else if (voltage > 660 && voltage < 780)
       return sw2;
@@ -895,19 +841,16 @@ int AnalogSW()
       return sw6;
     else
       return 0;
-  }
-  else //if (kboard == PDR2)
+  } else  //if (kboard == PDR2)
   {
-    if (timerInicial > millis())
-    {
+    if (timerInicial > millis()) {
       if (voltage > 860 && voltage < 900)
         return swC;
       else if (voltage > 620 && voltage < 660)
         return swN;
       else
         return 0;
-    }
-    else if (voltage > 780 && voltage < 880)
+    } else if (voltage > 780 && voltage < 880)
       return sw5;
     else if (voltage > 660 && voltage < 780)
       return sw4;
@@ -924,22 +867,19 @@ int AnalogSW()
   }
 }
 
-void loop()
-{
-//niveldabateria();
-pagcamber();
+void loop() {
+  //niveldabateria();
+  pagcamber();
   swA = AnalogSW();
 
-  if (swA != 0)
-  {
+  if (swA != 0) {
     lastClick = millis();
     displayStat = HIGH;
     digitalWrite(PIN_BACKLIGHT, displayStat);
   }
 
   if (timerLaser != 0 && millis() > (timeOn + timerLaser * minute)
-      && laserStat1 == HIGH )
-  {
+      && laserStat1 == HIGH) {
     laserStat1 = LOW;
     laserStat2 = LOW;
     //lcd.setCursor(2, 1);
@@ -948,20 +888,17 @@ pagcamber();
     digitalWrite(PIN_LASER_2, LOW);
   }
 
-  if (timerDisplay != 0 && (millis() > (lastClick + timerDisplay * minute)) )
-  {
+  if (timerDisplay != 0 && (millis() > (lastClick + timerDisplay * minute))) {
     displayStat = LOW;
     digitalWrite(PIN_BACKLIGHT, displayStat);
   }
 
   //Initial config.
-  if(timerInicial > millis())
-  {
+  if (timerInicial > millis()) {
     swA = AnalogSW();
 
     //B1+B2-----------------------------------
-    if (swA == swN)
-    {
+    if (swA == swN) {
       state = inic;
       lcd.clear();
       lcd.setCursor(4, 1);
@@ -972,8 +909,7 @@ pagcamber();
       lcd.clear();
     }
     //B1+B3-----------------------------------
-    if (swA == swC)
-    {
+    if (swA == swC) {
       state = vers;
       lcd.clear();
       lcd.setCursor(4, 1);
@@ -984,25 +920,20 @@ pagcamber();
       lcd.clear();
     }
   }
-  
+
   //if (millis() < (4 * mrefresh + 100))
-    //lcd.clear();
+  //lcd.clear();
 
   if (swA == 0)
     TimerCamb = 0;
   //B1--------------------------------------
-  if (swA == sw1)
-  {
-    if (state == trns)
-    {
-      pswd = pswd*10 + 1;
+  if (swA == sw1) {
+    if (state == trns) {
+      pswd = pswd * 10 + 1;
     }
-    if (TimerCamb == 0)
-    {
+    if (TimerCamb == 0) {
       TimerCamb = millis();
-    }
-    else if (millis() > TimerCamb + 5000)
-    {
+    } else if (millis() > TimerCamb + 5000) {
       lcd.clear();
       lcd.setCursor(3, 1);
       lcd.print("ALTERADO PARA");
@@ -1042,11 +973,9 @@ pagcamber();
     lcd.clear();
   }
   //B2--------------------------------------
-  if (swA == sw2)
-  {
-    if (state == trns)
-    {
-      pswd = pswd*10 + 2;
+  if (swA == sw2) {
+    if (state == trns) {
+      pswd = pswd * 10 + 2;
     }
     refreshDisplay = HIGH;
     lock = !lock;
@@ -1054,13 +983,10 @@ pagcamber();
     lcd.setCursor(7, 1);
     lcd.print("SALVAR");
 
-    if(state == parb)
-    {
+    if (state == parb) {
       bvParam = abVoltage;
       EEPROM.put(bpvAdrs, bvParam);
-    }
-    else if (state == text)
-    {
+    } else if (state == text) {
       if (exibTxt < TXT3)
         exibTxt++;
       else if (exibTxt == TXT3)
@@ -1069,27 +995,21 @@ pagcamber();
         exibTxt = TXT1;
 
       EEPROM.put(txtAdrs, exibTxt);
-    }
-    else if(state == ebat)
-    {
-      if(bTipo == bHide)
+    } else if (state == ebat) {
+      if (bTipo == bHide)
         bTipo = bShow;
       else
         bTipo = bHide;
-        
+
       EEPROM.put(sbsAdrs, bTipo);
-    }
-    else if (state == splr)
-    {
+    } else if (state == splr) {
       if (spSts == spOn)
         spSts = spOff;
       else
         spSts = spOn;
-      
+
       EEPROM.put(splAdrs, spSts);
-    }
-    else if (state == skbd)
-    {
+    } else if (state == skbd) {
       if (kboard == PDR1)
         kboard = PDR2;
       else
@@ -1097,8 +1017,7 @@ pagcamber();
 
       EEPROM.put(kbdAdrs, kboard);
     }
-    if (state == sets)
-    {
+    if (state == sets) {
       if (sense == 1)
         sense = 5;
       else if (sense == 5)
@@ -1107,11 +1026,10 @@ pagcamber();
         sense = 1;
       else
         sense = 5;
-        
+
       EEPROM.put(senAdrs, sense);
     }
-    if (state == sdis)
-    {
+    if (state == sdis) {
       if (chrd == 2)
         chrd = 0;
       else if (chrd == 0)
@@ -1120,8 +1038,7 @@ pagcamber();
         chrd = 0;
       EEPROM.put(chdAdrs, chrd);
     }
-    if (state == setk)
-    {
+    if (state == setk) {
       if (kpis == kpiOn)
         kpis = kpiOff;
       else if (kpis == kpiOff)
@@ -1130,8 +1047,7 @@ pagcamber();
         kpis = kpiOff;
       EEPROM.put(kpiAdrs, kpis);
     }
-    if (state == angs)
-    {
+    if (state == angs) {
       if (TurnAngle == 10)
         TurnAngle = 20;
       else if (TurnAngle == 20)
@@ -1140,8 +1056,7 @@ pagcamber();
         TurnAngle = 20;
       EEPROM.put(trnAdrs, TurnAngle);
     }
-    if (state == rods)
-    {
+    if (state == rods) {
       if (WPos == fDir)
         WPos = fEsq;
       else if (WPos == fEsq)
@@ -1154,8 +1069,7 @@ pagcamber();
         WPos = fDir;
       EEPROM.put(whpAdrs, WPos);
     }
-    if (state == timl)
-    {
+    if (state == timl) {
       if (timerLaser == 0)
         timerLaser = 5;
       else if (timerLaser == 5)
@@ -1168,8 +1082,7 @@ pagcamber();
         timerLaser = 0;
       EEPROM.put(ltmAdrs, timerLaser);
     }
-    if (state == timd)
-    {
+    if (state == timd) {
       if (timerDisplay == 0)
         timerDisplay = 2;
       else if (timerDisplay == 2)
@@ -1182,16 +1095,14 @@ pagcamber();
         timerDisplay = 0;
       EEPROM.put(dtmAdrs, timerDisplay);
     }
-    if (state == chan)
-    {
+    if (state == chan) {
       if (chnl < 4)
         chnl++;
       else
         chnl = 1;
       EEPROM.put(cnlAdrs, chnl);
     }
-    if (state == inic)
-    {
+    if (state == inic) {
       SAcX = FAcX;
       SAcY = FAcY;
       SAcZ = FAcZ;
@@ -1199,15 +1110,13 @@ pagcamber();
       EEPROM.put(AcYAdrs, SAcY);
       EEPROM.put(AcZAdrs, SAcZ);
     }
-    if (state == camb)
-    {
+    if (state == camb) {
       if (lcamber)
         lcamber = 0;
       else
         lcamber = camber;
     }
-    if (state == kpi1)
-    { /*
+    if (state == kpi1) { /*
         if(lcaster)
          lcaster = 0;
         else
@@ -1218,8 +1127,7 @@ pagcamber();
          lkpi = kpi;*/
       state = kpi2;
     }
-    if (state == kpi3)
-    {
+    if (state == kpi3) {
       kpi = (arm - armZero) / (2 * TurnAngle);
       kpi = kpi * (180 / M_PI);
 
@@ -1236,12 +1144,10 @@ pagcamber();
     lcd.clear();
   }
   //B3--------------------------------------
-  if (swA == sw3)
-  {
+  if (swA == sw3) {
     refreshDisplay = HIGH;
-    if (state == trns)
-    {
-      pswd = pswd*10 + 3;
+    if (state == trns) {
+      pswd = pswd * 10 + 3;
     }
     if (state == text)
       state = trns;
@@ -1256,31 +1162,22 @@ pagcamber();
     lcd.clear();
   }
   //B4--------------------------------------
-  if (swA == sw4)
-  {
+  if (swA == sw4) {
     lcd.clear();
     lcd.setCursor(7, 1);
     lcd.print("ZERAR");
-    if (state == trns)
-    {
-      pswd = pswd*10 + 4;
+    if (state == trns) {
+      pswd = pswd * 10 + 4;
     }
-    if (state == camb)
-    {
+    if (state == camb) {
       next = HIGH;
-    }
-    else if (state == inic)
-    {
+    } else if (state == inic) {
       SAcX = 0xFFFF;
       SAcY = 0xFFFF;
       SAcZ = 0XFFFF;
-    }
-    else if (state == vers)
-    {
+    } else if (state == vers) {
       state = text;
-    }
-    else if (state == kpi2)
-    {
+    } else if (state == kpi2) {
       armZero = arm;
       camberZero = camber;
       state = kpi3;
@@ -1289,24 +1186,18 @@ pagcamber();
     lcd.clear();
   }
   //B5--------------------------------------
-  if (swA == sw5)
-  {
+  if (swA == sw5) {
     refreshDisplay = HIGH;
     lcd.clear();
-    if (state < inic)
-    {
+    if (state < inic) {
       state = camb;
       lcd.setCursor(3, 1);
       lcd.print("SAINDO DO MENU");
-    }
-    else if (state == inic)
-    {
+    } else if (state == inic) {
       state = camb;
       lcd.setCursor(2, 1);
       lcd.print("SAINDO DE AJUSTE");
-    }
-    else if (!laserStat1)
-    {
+    } else if (!laserStat1) {
       laserStat1 = HIGH;
       laserStat2 = HIGH;
       lcd.setCursor(4, 1);
@@ -1314,9 +1205,7 @@ pagcamber();
       digitalWrite(PIN_LASER_1, HIGH);
       digitalWrite(PIN_LASER_2, HIGH);
       timeOn = millis();
-    }
-    else
-    {
+    } else {
       laserStat1 = LOW;
       laserStat2 = LOW;
       lcd.setCursor(2, 1);
@@ -1340,39 +1229,31 @@ pagcamber();
   //------------------------------------------------------------
 
   //MAIN
-  if (refreshDisplay)
-  {
+  if (refreshDisplay) {
     //lcd.clear();
-    
-    if(state == parb)
-    {
-      lcd.setCursor(2,1);
+
+    if (state == parb) {
+      lcd.setCursor(2, 1);
       lcd.print("BAT. PARAMETRO 8V:");
-      lcd.setCursor(4,2);
+      lcd.setCursor(4, 2);
       lcd.print(bvParam);
     }
-    if (state == trns)
-    {
+    if (state == trns) {
       lcd.clear();
-      lcd.setCursor(4,1);
+      lcd.setCursor(4, 1);
       //lcd.print(pswd);
 
-      if(pswd == 4422)
-      {
+      if (pswd == 4422) {
         state = parb;
         pswd = 0;
         lcd.clear();
-      }
-      else if(pswd > 1000)
-      {
+      } else if (pswd > 1000) {
         state = camb;
         pswd = 0;
         lcd.clear();
       }
-      
     }
-    if (state == text)
-    {
+    if (state == text) {
       lcd.setCursor(4, 1);
       lcd.print("INICIAL");
       pagcamber();
@@ -1382,27 +1263,23 @@ pagcamber();
         lcd.print("TEXTO 1");
       else if (exibTxt == TXT2)
         lcd.print("TEXTO 2");
-      else if(exibTxt == TXT3)
+      else if (exibTxt == TXT3)
         lcd.print("TEXTO 1 E 2");
       else
         lcd.print("TEXTO 1");
-    }
-    else if (state == vers)
-    {
+    } else if (state == vers) {
       pagcamber();
       lcd.setCursor(2, 1);
       lcd.print("PROGRAMACAO SLX");
       lcd.setCursor(2, 2);
       lcd.print("VERSAO 2.04");
-      lcd.setCursor(3,3);
+      lcd.setCursor(3, 3);
       lcd.print(txtSerial[0]);
       lcd.print(txtSerial[1]);
       lcd.print(txtSerial[2]);
       lcd.print(txtSerial[3]);
       lcd.print(txtSerial[4]);
-    }
-    else if (state == skbd)
-    {
+    } else if (state == skbd) {
       lcd.setCursor(2, 1);
       lcd.print("TECLADO");
       lcd.setCursor(2, 2);
@@ -1410,17 +1287,13 @@ pagcamber();
         lcd.print("PADRAO 1");
       else if (kboard == PDR2)
         lcd.print("PADRAO 2");
-    }
-    else if (state == sets)
-    {
+    } else if (state == sets) {
       lcd.setCursor(2, 1);
       lcd.print("SENSIBILIDADE");
       lcd.setCursor(2, 2);
       lcd.print(sense);
       lcd.print("'");
-    }
-    else if (state == setk)
-    {
+    } else if (state == setk) {
       lcd.setCursor(2, 1);
       lcd.print("CALCULO DE KPI");
       lcd.setCursor(2, 2);
@@ -1430,18 +1303,14 @@ pagcamber();
         lcd.print("DESLIGADO");
       else
         lcd.print("DEFINIR!");
-    }
-    else if (state == angs)
-    {
+    } else if (state == angs) {
       lcd.setCursor(2, 1);
       lcd.print("ANGULO DE GIRO");
       lcd.setCursor(2, 2);
       lcd.print("USAR ");
       lcd.print(TurnAngle);
       lcd.print(" GRAUS");
-    }
-    else if (state == rods)
-    {
+    } else if (state == rods) {
       lcd.setCursor(2, 1);
       lcd.print("CONFIGURAR LADO");
       lcd.setCursor(2, 2);
@@ -1455,9 +1324,7 @@ pagcamber();
         lcd.print("TRAS MOTORISTA");
       else
         lcd.print("DEFINIR!");
-    }
-    else if (state == sdis)
-    {
+    } else if (state == sdis) {
       lcd.setCursor(2, 1);
       lcd.print("MODO DO DISPLAY");
       lcd.setCursor(2, 2);
@@ -1467,44 +1334,35 @@ pagcamber();
         lcd.print("20/16 CARACTERES");
       else
         lcd.print("16 CARACTERES");
-    }
-    else if (state == timl)
-    {
+    } else if (state == timl) {
       lcd.setCursor(2, 1);
       lcd.print("TEMPO DO LASER");
       lcd.setCursor(2, 2);
       if (timerLaser == 0)
         lcd.print("NAO DESLIGAR");
-      else
-      {
+      else {
         lcd.print(timerLaser);
         lcd.print(" MINUTOS");
       }
-    }
-    else if (state == timd)
-    {
+    } else if (state == timd) {
       lcd.setCursor(2, 1);
       lcd.print("TEMPO DO DISPLAY");
       lcd.setCursor(2, 2);
       if (timerDisplay == 0)
         lcd.print("NAO DESLIGAR");
-      else
-      {
+      else {
         lcd.print(timerDisplay);
         lcd.print(" MINUTOS");
       }
     }
 
-    else if (state == chan)
-    {
+    else if (state == chan) {
       lcd.setCursor(2, 1);
       lcd.print("CANAL WIFI");
       lcd.setCursor(2, 2);
       lcd.print("CANAL ");
       lcd.print(chnl);
-    }
-    else if (state == splr)
-    {
+    } else if (state == splr) {
       lcd.setCursor(2, 1);
       lcd.print("MODO SPOILER");
       lcd.setCursor(2, 2);
@@ -1514,9 +1372,7 @@ pagcamber();
         lcd.print("DESATIVADO");
       else
         lcd.print("DEFINIR");
-    }
-    else if (state == ebat)
-    {
+    } else if (state == ebat) {
       lcd.setCursor(2, 1);
       lcd.print("INDICADOR BATERIA");
       lcd.setCursor(2, 2);
@@ -1526,22 +1382,17 @@ pagcamber();
         lcd.print("OCULTAR");
       else
         lcd.print("DEFINIR");
-    }
-    else if (state == inic)
-    {
+    } else if (state == inic) {
       lcd.setCursor(2, 0);
       lcd.print("NIVELE A MAQUINA");
-      if (SAcX < 20000)
-      {
+      if (SAcX < 20000) {
         lcd.setCursor(2, 2);
         lcd.print("ANGULO X= ");
         printGraus(xAngle);
         lcd.setCursor(2, 3);
         lcd.print("ANGULO Y= ");
         printGraus(yAngle);
-      }
-      else
-      {
+      } else {
         lcd.setCursor(2, 2);
         lcd.print("ANGULO X= ");
         lcd.print((int)FAcX);
@@ -1551,31 +1402,23 @@ pagcamber();
         lcd.print((int)FAcY);
         lcd.print("  ");
       }
-    }
-    else if (state == camb)
-    {
+    } else if (state == camb) {
       pagcamber();
       lcd.setCursor(7, 1);
       lcd.print("CAMBER:");
       lcd.setCursor(8, 2);
       printGraus(camber);
-      if (lcamber)
-      {
+      if (lcamber) {
         lcd.setCursor(7, 3);
         lcd.print("S:");
         printGraus(lcamber);
       }
       level(arm);
-    }
-    else if (state == kpi1)
-    {
-      if (arm < 0.5 && arm > -0.5)
-      {
+    } else if (state == kpi1) {
+      if (arm < 0.5 && arm > -0.5) {
         state = kpi2;
         lcd.clear();
-      }
-      else
-      {
+      } else {
         lcd.setCursor(2, 1);
         lcd.print("O BRACO OU SALVE");
         lcd.setCursor(2, 2);
@@ -1584,9 +1427,7 @@ pagcamber();
         lcd.print("DESNIVELADO");
         level(arm);
       }
-    }
-    else if (state == kpi2)
-    {
+    } else if (state == kpi2) {
       lcd.setCursor(2, 1);
       lcd.print("GIRE O PNEU ");
       lcd.print(TurnAngle);
@@ -1596,8 +1437,7 @@ pagcamber();
       lcd.setCursor(2, 3);
       lcd.print("PRESSIONE ZERAR");
     }
-    if (state == kpi3)
-    {
+    if (state == kpi3) {
       lcd.setCursor(2, 0);
       lcd.print("RETORNE A 0");
       lcd.write(B11011111);
@@ -1610,20 +1450,16 @@ pagcamber();
       lcd.print("PARA FORA");
       lcd.setCursor(2, 3);
       lcd.print("PRESSIONE SALVAR");
-    }
-    else if (state == kpi4)
-    {
+    } else if (state == kpi4) {
 
-      if (kpis == kpiOff)
-      {
+      if (kpis == kpiOff) {
         lcd.setCursor(7, 1);
         lcd.print("CASTER:");
         lcd.setCursor(8, 2);
         printGraus(lcaster);
       }
 
-      if (kpis == kpiOn)
-      {
+      if (kpis == kpiOn) {
         lcd.setCursor(5, 1);
         lcd.print("CTR:");
         lcd.setCursor(10, 1);
@@ -1722,20 +1558,15 @@ pagcamber();
   Data[41] = '\n';
 
 
-  if (Serial.available())
-  {
+  if (Serial.available()) {
     serialData = Serial.read();
-    if (serialData == '0')
-    {
+    if (serialData == '0') {
       Serial.write(Data, DataSize);
       Serial.flush();
-      if (next)
-      {
+      if (next) {
         next = !next;
       }
-    }
-    else if (serialData == 'A')
-    {
+    } else if (serialData == 'A') {
       if (WPos == fDir)
         WPos = tEsq;
       else if (WPos == fEsq)
@@ -1747,8 +1578,7 @@ pagcamber();
 
       Serial.write(Data, DataSize);
       Serial.flush();
-      if (next)
-      {
+      if (next) {
         next = !next;
       }
     }
@@ -1757,43 +1587,35 @@ pagcamber();
   //------------------------------------------------------------
   //Battery Status
 
-  if(analogRead(PIN_BVOLTAGE) < 280)
-  {
+  if (analogRead(PIN_BVOLTAGE) < 280) {
     carregando = true;
-  }
-  else
-  {
-    if(carregando)
+  } else {
+    if (carregando)
       abVoltage = 800;
-      
+
     carregando = false;
     bVoltage += analogRead(PIN_BVOLTAGE);
     bCntr++;
-    
-    if(bCntr == 40)
-    {
+
+    if (bCntr == 40) {
       bCntr = 0;
-      abVoltage = bVoltage/40;
+      abVoltage = bVoltage / 40;
       bVoltage = 0;
     }
-    vAtual = (abVoltage*vConst)/(bvParam);
+    vAtual = (abVoltage * vConst) / (bvParam);
   }
 
-  if (state == camb || state == kpi4)
-  {
+  if (state == camb || state == kpi4) {
     lcd.setCursor(chrd, 3);
     //CHARGING!!
-    if (carregando)
-    {
+    if (carregando) {
       //lcd.setCursor(19-chrd, 0);
- //     lcd.write(byte(bcar));
+      //     lcd.write(byte(bcar));
       lcd.print("     ");
-    }
-    else if (!carregando) //NOT CHARGING
+    } else if (!carregando)  //NOT CHARGING
     {
 
-      if(vAtual < 5.2)
-      {
+      if (vAtual < 5.2) {
         lcd.clear();
         lcd.setCursor(19 - chrd, 0);
         lcd.write(byte(0));
@@ -1803,51 +1625,47 @@ pagcamber();
         lcd.print("RECARREGAR");
         lcd.setCursor(8, 3);
         lcd.print("!!!");
-        
+
         laserStat1 = LOW;
         laserStat2 = LOW;
         digitalWrite(PIN_LASER_1, laserStat1);
         digitalWrite(PIN_LASER_2, laserStat2);
-        
+
         displayStat = LOW;
         digitalWrite(PIN_BACKLIGHT, displayStat);
-        while(true)
-        {
-          if (Serial.available())
-          {
+        while (true) {
+          if (Serial.available()) {
             serialData = Serial.read();
-            if (serialData == 'T')
-            {
+            if (serialData == 'T') {
               Serial.write('Q');
               Serial.flush();
-              while(!Serial.available());
+              while (!Serial.available())
+                ;
               Serial.readBytes(buf2, 2);
               Serial.flush();
-              if ( buf2[0] == 'T' && buf2[1] == '1')
-              {
+              if (buf2[0] == 'T' && buf2[1] == '1') {
                 Serial.write('R');
                 Serial.flush();
-                while(!Serial.available());
+                while (!Serial.available())
+                  ;
                 Serial.readBytes(txtInic, 80);
                 Serial.flush();
                 Serial.write('D');
                 EEPROM.put(tx1Adrs, txtInic);
-              }
-              else if ( buf2[0] == 'T' && buf2[1] == '2')
-              {
+              } else if (buf2[0] == 'T' && buf2[1] == '2') {
                 Serial.write('R');
                 Serial.flush();
-                while(!Serial.available());
+                while (!Serial.available())
+                  ;
                 Serial.readBytes(txtInic, 80);
                 Serial.flush();
                 Serial.write('D');
                 EEPROM.put(tx2Adrs, txtInic);
-              }
-              else if ( buf2[0] == 'T' && buf2[1] == 'S')
-              {
+              } else if (buf2[0] == 'T' && buf2[1] == 'S') {
                 Serial.write('R');
                 Serial.flush();
-                while(!Serial.available());
+                while (!Serial.available())
+                  ;
                 Serial.readBytes(txtSerial, 5);
                 Serial.flush();
                 Serial.write('D');
@@ -1856,82 +1674,67 @@ pagcamber();
             }
           }
         }
-      }
-      else if(bTipo == bShow)
-      {
-        if (vAtual < 6.5)
-        {
-     //     lcd.write(byte(b00));
-          if ((vAtual > 6.2 && vAtual <= 6.3) && (millis() > timeBateria + minute))
-          {
+      } else if (bTipo == bShow) {
+        if (vAtual < 6.5) {
+          //     lcd.write(byte(b00));
+          if ((vAtual > 6.2 && vAtual <= 6.3) && (millis() > timeBateria + minute)) {
             timeBateria = millis();
             lcd.clear();
             lcd.setCursor(19 - chrd, 0);
-       //     lcd.write(byte(b00));
+            //     lcd.write(byte(b00));
             lcd.setCursor(3, 1);
             lcd.print("BATERIA BAIXA");
             lcd.setCursor(4, 2);
             lcd.print("RECARREGAR");
             delay(5000);
             lcd.clear();
-          }
-          else if(vAtual <= 6.2)
-          {
-            
+          } else if (vAtual <= 6.2) {
+
             lcd.clear();
             lcd.setCursor(19 - chrd, 0);
-       //     lcd.write(byte(b00));
+            //     lcd.write(byte(b00));
             lcd.setCursor(3, 1);
             lcd.print("BATERIA BAIXA");
             lcd.setCursor(4, 2);
             lcd.print("RECARREGAR");
-            
+
             laserStat1 = LOW;
             laserStat2 = LOW;
             digitalWrite(PIN_LASER_1, laserStat1);
             digitalWrite(PIN_LASER_2, laserStat2);
             delay(2000);
             //Sleep!
-            
+
             displayStat = LOW;
             digitalWrite(PIN_BACKLIGHT, displayStat);
           }
-        }
-        else if (vAtual >= 6.5 && vAtual < 7.0){
-     //     lcd.write(byte(b25));
-        }
-        else if (vAtual >= 7.0 && vAtual < 7.5){
-     //     lcd.write(byte(b50));
-        }
-        else if (vAtual >= 7.5 && vAtual < 8.0){
-    //      lcd.write(byte(b75));
-        }
-        else if (vAtual >= 8.0) {
-     //     lcd.write(byte(b100));
-        }
-        else
+        } else if (vAtual >= 6.5 && vAtual < 7.0) {
+          //     lcd.write(byte(b25));
+        } else if (vAtual >= 7.0 && vAtual < 7.5) {
+          //     lcd.write(byte(b50));
+        } else if (vAtual >= 7.5 && vAtual < 8.0) {
+          //      lcd.write(byte(b75));
+        } else if (vAtual >= 8.0) {
+          //     lcd.write(byte(b100));
+        } else
           lcd.print(" ");
-        
-        pBat = int( ((vAtual-6.2)/1.8)*100 );
-        if(pBat > 100)
+
+        pBat = int(((vAtual - 6.2) / 1.8) * 100);
+        if (pBat > 100)
           pBat = 100;
-        if(pBat < 0)
+        if (pBat < 0)
           pBat = 0;
-        pBat = int(pBat/sense)*sense;
+        pBat = int(pBat / sense) * sense;
         lcd.print(pBat);
         lcd.print("%  ");
-      }
-      else if(bTipo == bHide)
-      {
-        if (vAtual <= 6.2)
-        {
-      //    lcd.write(byte(b00));
-          if ((vAtual > 6.2 && vAtual <= 6.3) && (millis() > timeBateria + 2*minute))
-          {
+      } else if (bTipo == bHide) {
+        if (vAtual <= 6.2) {
+          //    lcd.write(byte(b00));
+          if ((vAtual > 6.2 && vAtual <= 6.3) && (millis() > timeBateria + 2 * minute)) {
             timeBateria = millis();
             lcd.clear();
             lcd.setCursor(19 - chrd, 0);
-      //      lcd.write(byte(b00));
+            //      lcd.write(byte(b00));
             lcd.setCursor(3, 1);
             lcd.print("BATERIA BAIXA");
             lcd.setCursor(4, 2);
@@ -1939,11 +1742,9 @@ pagcamber();
             delay(5000);
             lcd.clear();
           }
-        }
-        else if (vAtual >= 8.3) {
-     //     lcd.write(byte(b100));
-        }
-        else
+        } else if (vAtual >= 8.3) {
+          //     lcd.write(byte(b100));
+        } else
           lcd.print(" ");
       }
     }
@@ -1962,6 +1763,4 @@ pagcamber();
     else
       lcd.print("--");
   }
-  
-
 }
